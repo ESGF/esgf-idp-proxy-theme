@@ -1,12 +1,12 @@
 <#import "template.ftl" as layout>
-<@layout.registrationLayout displayInfo=social.displayInfo displayWide=(realm.password && social.providers??); section>
+<@layout.registrationLayout; section>
 
 <#if section = "header">Login</#if>
 
 <#if section = "content">
 <div class="row">
     <div class="login-window mx-auto">
-        <div class="myform form mx-3">
+        <div class="form mx-3">
             <div class="mb-3 mt-2">
                 <div class="col-md-12 text-center">
                     <h1 class="text-primary">Login</h1>
@@ -17,9 +17,13 @@
                     Select your institution
                 </button>
                 <div class="dropdown-menu text-center w-100" aria-labelledby="dropdownMenuButton">
+                    <#if myOptionalVar??>
                     <#list social.providers as p>
                     <a href="${p.loginUrl}" id="zocial-${p.alias}" class="zocial dropdown-item"> <span>${p.displayName}</span></a>
                     </#list>
+                    <#else>
+                    <span>No identity providers available</span>
+                    </#if>
                 </div>
             </div>
             <div class="mt-1">
@@ -38,12 +42,21 @@
                     Sign in with one of these identity providers
                 </div>
             </div>
+            <#if social.providers??>
             <div class="d-flex justify-content-end social_icon d-flex justify-content-center mb-3">
-                <a href="" title="Sign in with ORCID"><span><i class="fab fa-orcid"></i></span></a>
-                <a href="" title="Sign in with GitHub"><span><i class="fab fa-github-square"></i></span></a>
-                <a href="" title="Sign in with Google Plus"><span><i class="fab fa-google-plus-square"></i></span></a>
-                <a href="" title="Sign in with Microsoft"><span><i class="fab fa-windows"></i></span></a>
+                <#list social.providers as p>
+                <#if p.alias == "orcid">
+                <a href="${p.loginUrl}" title="Sign in with ORCID"><span><i class="fab fa-orcid"></i></span></a>
+                <#elseif p.alias == "github">
+                <a href="${p.loginUrl}" title="Sign in with GitHub"><span><i class="fab fa-github-square"></i></span></a>
+                <#elseif p.alias == "google">
+                <a href="${p.loginUrl}" title="Sign in with Google Plus"><span><i class="fab fa-google-plus-square"></i></span></a>
+                <#elseif p.alias == "microsoft">
+                <a href="${p.loginUrl}" title="Sign in with Microsoft"><span><i class="fab fa-windows"></i></span></a>
+                </#if>
+                </#list>
             </div>
+            </#if>
         </div>
     </div>
 </div>
