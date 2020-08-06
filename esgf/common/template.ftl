@@ -29,7 +29,18 @@
                     <img src="${url.resourcesPath}/img/esgf-logo.png" class="img-fluid logo" alt="Logo">
                 </div>
             </div>
-            <#nested "content">
+            <div class="row">
+                <div class="login-window mx-auto">
+                    <div class="form mx-3">
+                        <div class="mb-3 mt-2">
+                            <div class="col-md-12 text-center">
+                                <h1 class="text-primary"><#nested "header"></h1>
+                            </div>
+                        </div>
+                        <#nested "form">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- JS, Popper.js, and jQuery -->
