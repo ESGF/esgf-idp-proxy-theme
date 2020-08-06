@@ -9,9 +9,11 @@
         Select your institution
     </button>
     <div class="dropdown-menu text-center w-100" aria-labelledby="dropdownMenuButton">
-        <#if myOptionalVar??>
+        <#if social.providers??>
         <#list social.providers as p>
+        <#if p.alias != 'orcid' && p.alias != 'github' && p.alias != 'google' && p.alias != 'microsoft'>
         <a href="${p.loginUrl}" id="zocial-${p.alias}" class="zocial dropdown-item"> <span>${p.displayName}</span></a>
+        </#if>
         </#list>
         <#else>
         <span>No identity providers available</span>
