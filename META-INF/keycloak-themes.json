@@ -1,0 +1,6 @@
+{
+    "themes": [{
+        "name" : "esgf",
+        "types": [ "common", "login" ]
+    }]
+}
